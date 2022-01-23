@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>Fetch from JSON</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Fetch from JSON API</h1>
+    <div class="container">
+        <div id="title">
+            <h3>TITLE</h3>
+
+        </div>
+        <div id="price">
+            <h3>PRICE</h3>
+        </div>
+
+    </div>
+
+    <script>
+        fetch('https://s3.amazonaws.com/open-to-cors/assignment.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (obj) {
+            console.log(obj.products);
+
+            for(var o in obj.products){
+                document.getElementById("title").innerHTML += 
+                "<p>" + obj.products[o].title + "</p><br/>"; 
+                document.getElementById("price").innerHTML +=
+                "<p>$" + obj.products[o].price + "</p><br/>";
+            }
+        })
+
+        .catch((error) => {
+            console.error("Something went wrong");
+            console.error(error);
+        });
+
+    </script>
+</body>
+</html>
